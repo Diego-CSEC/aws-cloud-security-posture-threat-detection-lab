@@ -1,38 +1,29 @@
-# AWS Cloud Security Assessment Report
-
-## 1. Assessment Overview
-
-This report documents a cloud security assessment of a simulated AWS environment. The assessment focuses on identity access, storage security, audit visibility, threat detection, and cost control.
-
-## 2. Scope
-
-Services reviewed: 
-
-- AWS IAM
-- Amazon S3
-- AWS CloudTrail Event History
-- AWS Budgets
-- AWS Security Hub CSPM
-- Amazon GuardDuty
-
-## 3. Finding: IAM-001 Excessive IAM Permissions
+## Security Hub Finding: IAM Wildcard Administrative Privileges
 
 **Severity:** High
 
 **Status:** Remediated
 
-**Description:**  
-An IAM policy was created with wildcard permissions for both actions and resources.
+**Finding:**  
+Security Hub identified that an IAM customer-managed policy allowed full `"*"` administrative privileges.
 
 **Evidence:**  
-The policy includes `"Action": "*"` and `"Resource": "*"`, which grants broad access across AWS services and resources.
+Security Hub generated a high-severity finding titled `IAM policies should not allow full "*" administrative privileges`.
 
 **Risk:**  
-If attached to a user, group, or role, this policy could allow unauthorized access, privilege escalation, resource modification, data exposure, or full account compromise.
+IAM policies with full wildcard permissions can allow broad administrative access across AWS services and resources. If attached to an identity, this could lead to privilege escalation, unauthorized resource modification, data exposure, account compromise, or unexpected cloud costs.
 
-**Remediation Plan:**  
-Replace wildcard permissions with a least-privilege policy scoped only to the required service and resource.
+**Remediation:**  
+The intentionally insecure lab policy was removed after evidence collection. A least-privilege replacement policy was created to allow only read-only access to the specific S3 lab bucket.
+
+**Validation:**  
+The least-privilege policy was reviewed in IAM and documented in the repository. Security Hub finding evidence was captured before remediation, and the insecure policy was deleted from the AWS account.
 
 **Screenshot Evidence:**  
-- `screenshots/iam-insecure-policy-before.png`
-- `screenshots/iam-insecure-policy-validation.png`
+- `screenshots/securityhub-all-findings.png`
+- `screenshots/securityhub-finding-detail.png`
+- `screenshots/securityhub-iam-finding-resource.png`
+- `screenshots/iam-insecure-policy-before-deletion.png`
+- `screenshots/iam-insecure-policy-deleted.png`
+- `screenshots/iam-remediated-policy-after.png`
+- `screenshots/iam-remediated-policy-visual-mode.png`
