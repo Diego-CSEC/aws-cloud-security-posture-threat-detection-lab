@@ -113,7 +113,32 @@ Budget alert configuration was reviewed and documented with screenshot evidence.
 - `screenshots/billing-budget-alerts.png`
 
 ---
+# DET-001: GuardDuty Threat Detection Review
 
+**Severity:** Informational  
+**Status:** Reviewed  
+**Source:** Amazon GuardDuty
+
+## Description
+
+Amazon GuardDuty was enabled in `us-east-2` to review AWS threat detection capabilities.
+
+GuardDuty findings were reviewed to understand how AWS reports suspicious or security-relevant activity, including finding type, severity, affected account/resource, timestamps, and recommended investigation context.
+
+## Why This Matters
+
+Cloud Security Analysts use threat detection tools to identify suspicious activity, investigate alerts, determine severity, and recommend response actions.
+
+GuardDuty helps detect activity such as credential misuse, unusual API activity, reconnaissance behavior, and potentially compromised resources.
+
+## Review Performed
+
+GuardDuty findings were reviewed from the Findings dashboard. One finding was opened and documented for triage analysis.
+
+## Screenshot Evidence
+
+- `screenshots/guardduty-finding-detail.png`
+  
 # IAM-001: Excessive IAM Wildcard Permissions
 
 **Severity:** High  
