@@ -19,7 +19,7 @@ Services reviewed:
 
 **Severity:** High
 
-**Status:** Finding Created
+**Status:** Remediated
 
 **Description:**  
 An IAM policy was created with wildcard permissions for both actions and resources.
