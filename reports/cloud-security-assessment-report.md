@@ -6,7 +6,7 @@ This report documents a cloud security assessment of a simulated AWS environment
 
 ## 2. Scope
 
-Services reviewed:
+Services reviewed: 
 
 - AWS IAM
 - Amazon S3
