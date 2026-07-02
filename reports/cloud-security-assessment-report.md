@@ -14,8 +14,8 @@ The lab was designed to simulate a small organization that recently started usin
 | Primary Region | `us-east-2` / United States (Ohio) |
 | Project Type | Cloud Security Portfolio Lab |
 | Data Used | Fake lab data only |
-| Main Services Reviewed | IAM, S3, CloudTrail Event History, AWS Budgets, Security Hub |
-| Trial Services Used | AWS Security Hub free trial |
+| Main Services Reviewed | IAM, S3, CloudTrail Event History, AWS Budgets, Security Hub, GuardDuty |
+| Trial Services Used | AWS Security Hub free trial, Amazon GuardDuty free trial |
 | Services Avoided for Cost Control | EC2, RDS, NAT Gateway, Load Balancers, CloudTrail Lake, Macie, Inspector, Detective |
 
 ## 3. Assessment Scope
@@ -29,6 +29,8 @@ The assessment reviewed the following areas:
 - S3 encryption settings
 - CloudTrail Event History visibility
 - Security Hub posture management findings
+- GuardDuty threat detection findings
+- Root account usage risk
 - Cleanup and free-trial tracking
 
 The following services were intentionally excluded from this phase of the lab to reduce cost and complexity:
@@ -55,9 +57,12 @@ The assessment followed a basic cloud security review workflow:
 5. Create a least-privilege IAM policy scoped to the specific S3 bucket.
 6. Review CloudTrail Event History for AWS management activity.
 7. Enable AWS Security Hub to review posture management findings.
-8. Document findings, risks, remediation steps, validation, and screenshot evidence.
+8. Document Security Hub findings, risks, remediation steps, and screenshot evidence.
 9. Remove the intentionally insecure IAM policy after evidence collection.
-10. Track cleanup actions to avoid unnecessary AWS charges.
+10. Enable Amazon GuardDuty to review threat detection findings.
+11. Review GuardDuty root credential usage finding.
+12. Begin remediation by creating an IAM administrative user for future daily lab activity.
+13. Track cleanup actions to avoid unnecessary AWS charges.
 
 ## 5. Findings Summary
 
@@ -65,10 +70,12 @@ The assessment followed a basic cloud security review workflow:
 |---|---|---|---|---|
 | COST-001 | Low | AWS Budget alert was needed before enabling lab resources | AWS Budgets | Remediated |
 | IAM-001 | High | IAM policy allowed full wildcard administrative privileges | Manual IAM Review / Security Hub | Remediated |
+| IAM-002 | Medium | Root account was used for daily lab activity | GuardDuty / Manual IAM Review | Remediation In Progress |
 | S3-001 | Medium | S3 public access controls required validation | Manual S3 Review | Pass |
 | S3-002 | Medium | S3 default encryption required validation | Manual S3 Review | Pass |
 | LOG-001 | Low | CloudTrail Event History review was needed for audit visibility | CloudTrail Event History | Reviewed |
 | CSPM-001 | Informational | Security Hub findings were reviewed for posture management | AWS Security Hub | Reviewed |
+| DET-001 | Informational | GuardDuty findings were reviewed for threat detection workflow | Amazon GuardDuty | Reviewed |
 
 ---
 
@@ -113,32 +120,7 @@ Budget alert configuration was reviewed and documented with screenshot evidence.
 - `screenshots/billing-budget-alerts.png`
 
 ---
-# DET-001: GuardDuty Threat Detection Review
 
-**Severity:** Informational  
-**Status:** Reviewed  
-**Source:** Amazon GuardDuty
-
-## Description
-
-Amazon GuardDuty was enabled in `us-east-2` to review AWS threat detection capabilities.
-
-GuardDuty findings were reviewed to understand how AWS reports suspicious or security-relevant activity, including finding type, severity, affected account/resource, timestamps, and recommended investigation context.
-
-## Why This Matters
-
-Cloud Security Analysts use threat detection tools to identify suspicious activity, investigate alerts, determine severity, and recommend response actions.
-
-GuardDuty helps detect activity such as credential misuse, unusual API activity, reconnaissance behavior, and potentially compromised resources.
-
-## Review Performed
-
-GuardDuty findings were reviewed from the Findings dashboard. One finding was opened and documented for triage analysis.
-
-## Screenshot Evidence
-
-- `screenshots/guardduty-finding-detail.png`
-  
 # IAM-001: Excessive IAM Wildcard Permissions
 
 **Severity:** High  
