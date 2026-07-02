@@ -7,7 +7,7 @@
       "Action": [
         "s3:ListBucket"
       ],
-      "Resource": "arn:aws:s3:::REPLACE-WITH-YOUR-BUCKET-NAME"
+      "Resource": "arn:aws:s3:::diego-security-lab-2026-8492-960882268585-us-east-2-an"
     },
     {
       "Sid": "AllowReadOnlyObjectsInSpecificSecurityLabBucket",
@@ -15,7 +15,7 @@
       "Action": [
         "s3:GetObject"
       ],
-      "Resource": "arn:aws:s3:::REPLACE-WITH-YOUR-BUCKET-NAME/*"
+      "Resource": "arn:aws:s3:::diego-security-lab-2026-8492-960882268585-us-east-2-an/*"
     }
   ]
 }
